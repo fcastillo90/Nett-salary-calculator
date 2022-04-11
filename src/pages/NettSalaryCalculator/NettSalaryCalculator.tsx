@@ -13,9 +13,9 @@ const NettSalaryCalculator = () => {
   const salaryRef = useRef<TextInput>();
   const resultRef = useRef<ScrollView>();
 
-  const [anualSalary, setAnualSalary] = useState<number>(55000);
+  const [anualSalary, setAnualSalary] = useState<number>(0);
   const [numberOfPays, setNumberOfPays] = useState<number>(12);
-  const [age, setAge] = useState<number>(32);
+  const [age, setAge] = useState<number>(0);
   const [employmentType, setEmploymentType] = useState<EmploymentType>(EmploymentType.GENERAL);
   const [professionType, setProfessionType] = useState('bachelor');
   const [geoMovility, setGeoMovility] = useState(false)

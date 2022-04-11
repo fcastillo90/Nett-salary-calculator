@@ -14,7 +14,7 @@ function ParoCalculator() {
   const averageSalaryRef = useRef<TextInput>();
   const resultRef = useRef<ScrollView>();
 
-  const [averageSalary, setAverageSalary] = useState<number>(2000);
+  const [averageSalary, setAverageSalary] = useState<number>(0);
   const [timeWorked, setTimeWorked] = useState<string>('15');
   const [childInCharge, setChildInCharge] = useState<string>('none');
   const [resultScroll, setResultScroll] = useState<LayoutRectangle | null>(null);
@@ -88,7 +88,7 @@ function ParoCalculator() {
           value={averageSalary ? averageSalary.toString() : ''}
           onChangeText={(value) => handleInputChange(value, ParoInputNames .AVERAGE_SALARY)}
           keyboardType="numeric"
-          placeholder='Ej: 24000'
+          placeholder='Ej: 1500'
         />
         <CustomDropdown
           bold
