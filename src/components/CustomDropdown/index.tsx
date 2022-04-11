@@ -37,6 +37,7 @@ function CustomDropdown(props: Props) {
           }
         }}
         items={data}
+        placeholder={{}}
         value={value}
         onValueChange={onChange}
         Icon={() => {

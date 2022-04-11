@@ -33,7 +33,7 @@ export enum PageNames {
 }
 
 export enum PageTitle {
-  NETT_SALARY = 'Calculadora de Sueldo Neto',
+  NETT_SALARY = 'Sueldo Neto',
   PARO = 'Paro',
 }
 

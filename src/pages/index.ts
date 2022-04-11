@@ -1,2 +1,2 @@
-export {default as NettSalaryCalculator} from './NettSalaryCalculator'
-export {default as ParoCalculator} from './ParoCalculator'
+export {default as NettSalaryCalculatorView} from './NettSalaryCalculator'
+export {default as ParoCalculatorView} from './ParoCalculator'

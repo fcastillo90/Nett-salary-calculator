@@ -7,8 +7,8 @@ import theme from './src/styles';
 export default function App() {
   return (
     <ThemeProvider theme={theme}>
-        <Src />
-        <StatusBar style="dark" />
+      <Src />
+      <StatusBar style="dark" />
     </ThemeProvider>
   );
 }
