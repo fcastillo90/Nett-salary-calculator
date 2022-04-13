@@ -18,7 +18,8 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.fcastillo90.calculadora-de-sueldo"
+      "bundleIdentifier": "com.fcastillo90.calculadora-de-sueldo",
+      "buildNumber": "3"
     },
     "android": {
       "adaptiveIcon": {
