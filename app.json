@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "calculadora-sueldo-neto-paro",
+    "name": "Calculadora de sueldo neto",
     "slug": "calculadora-sueldo-neto-paro",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "orientation": "portrait",
     "icon": "./assets/logo.png",
     "splash": {
