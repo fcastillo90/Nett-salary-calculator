@@ -133,7 +133,7 @@ function ParoCalculator() {
 const styles = StyleSheet.create({
   centeredContainer: {
     flex: 1,
-    marginTop: -23,
+    marginTop: -20,
     paddingRight: 25,
     paddingLeft: 25,
     paddingBottom: 0,

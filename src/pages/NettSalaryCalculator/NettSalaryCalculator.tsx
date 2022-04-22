@@ -197,7 +197,7 @@ const NettSalaryCalculator = (props: any) => {
 const styles = StyleSheet.create({
   centeredContainer: {
     flex: 1,
-    marginTop: -70,
+    marginTop: -20,
     paddingRight: 25,
     paddingLeft: 25,
     paddingBottom: 0,
