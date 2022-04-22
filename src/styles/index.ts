@@ -41,14 +41,9 @@ const theme = createTheme({
     },
   },
   lightColors: {
-    background:'#eee',
-    primary: '#03CEA4',
-    secondary: '#EAC435'
-  },
-  darkColors: {
-    background: '#345995',
-    primary: '#345995',
-    secondary: '#EAC435'
+    background:'#ECF0F1',
+    primary: '#03DDB2',
+    secondary: '#FFFFFF'
   },
 
 });

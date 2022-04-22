@@ -1,6 +1,6 @@
 import NettSalaryCalculator from "./NettSalaryCalculator";
 
-const NettSalaryCalculatorView = (props: any, { navigation }: any) => (
+const NettSalaryCalculatorView = (props: any) => (
     <NettSalaryCalculator {...props} />
 );
 export default NettSalaryCalculatorView;

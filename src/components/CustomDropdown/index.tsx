@@ -41,8 +41,12 @@ function CustomDropdown(props: Props) {
         value={value}
         onValueChange={onChange}
         Icon={() => {
-          return <Icon name="chevron-down-outline" type="ionicon"
-          size={25} color={theme?.colors.primary} />;
+          return <Icon 
+            name="chevron-down-outline" 
+            type="ionicon"
+            size={25} 
+            color={theme?.colors.primary} 
+          />;
         }}
       />
     </View>

@@ -1,8 +1,9 @@
 import { Text, Button, useTheme } from '@rneui/themed';
 import { Modal, StyleSheet, View } from 'react-native';
-import { NettSalaryCalculator } from '../../types';
+import { LanguageWords, NettSalaryCalculator } from '../../types';
 import { forwardRef } from 'react';
 import { getCurrencyFormatter } from '../../utils/currencyFormatter';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   result: number;
@@ -11,6 +12,7 @@ interface Props {
 }
 
 const ParoResult = forwardRef((props: Props, ref) => {
+  const { t } = useTranslation();
   const { result, onRecalculate, isVisible } = props;
   const { theme } = useTheme();
 
@@ -21,14 +23,13 @@ const ParoResult = forwardRef((props: Props, ref) => {
       <View style={styles.innerContainer}>
         <View style={styles.salary}>
           <Text bold style={styles.text}>
-            Importe Paro
+            {t(LanguageWords.RESULTS_PARO_TITLE)}
           </Text>
           <Text 
             bold 
             style={{
               ...styles.salaryText,
               color: theme?.colors.primary,
-              fontWeight: 'bold',
             }}
           >
             {getCurrencyFormatter(result)}
@@ -39,7 +40,7 @@ const ParoResult = forwardRef((props: Props, ref) => {
             marginTop: 20,
           }}
           onPress={onRecalculate}
-          title="Recalcular"
+          title={t(LanguageWords.BUTTON_RECALCULATE)}
         />
       </View>
     </View>
@@ -68,6 +69,7 @@ const styles = StyleSheet.create({
   salaryText: {
     fontSize: 45,
     marginBottom: 25,
+    fontWeight: 'bold',
     marginLeft: 10
   },
   title: {

@@ -1,15 +1,16 @@
 import { CheckBox, Icon, Input, Button, useTheme } from '@rneui/themed';
 import React, { useRef, useState } from 'react';
 import { LayoutRectangle, ScrollView, StyleSheet, TextInput, View } from 'react-native';
-import { CustomDropdown, Disclaimer, InputLabel, NettSalaryModal, ScrollBouncer } from '../../components';
+import { CustomDropdown, Disclaimer, InputLabel, NettSalaryModal } from '../../components';
 import { CONTRACT_TYPE, DISCAPACITY_TYPE, FAMILY_STATUS, PROFESSION_TYPE } from '../../constants';
-import { EmploymentType, NettSalaryCalculator as NettSalaryInterface, NettSalaryInputNames } from '../../types';
+import { EmploymentType, LanguagesAvailable, LanguageWords, NettSalaryCalculator as NettSalaryInterface, NettSalaryInputNames } from '../../types';
 import { initNettSalaryValues, nettSalaryCalculator } from '../../utils/netSalary';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import BannerSvg from '../../components/Svg';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useTranslation } from 'react-i18next';
 
-const NettSalaryCalculator = () => {
+const NettSalaryCalculator = (props: any) => {
   const { theme } = useTheme();
+  const { t, i18n } = useTranslation();
   const salaryRef = useRef<TextInput>();
   const resultRef = useRef<ScrollView>();
 
@@ -24,6 +25,8 @@ const NettSalaryCalculator = () => {
   const [isShowResult, setIsShowResult] = useState(false);
   const [nettSalary, setNettSalary] = useState<NettSalaryInterface>(initNettSalaryValues);
   const [resultScroll, setResultScroll] = useState<LayoutRectangle | null>(null);
+
+  const currentLanguage = i18n.language as LanguagesAvailable;
 
   const handleShowResult = () => {
     setIsShowResult(true);
@@ -76,29 +79,20 @@ const NettSalaryCalculator = () => {
   
   return (
     <>
-      <ScrollBouncer
-        topBounceColor={theme?.colors.primary}
-        bottomBounceColor={theme?.colors.background}
-      />
       <ScrollView 
         ref={resultRef as any}
         style={{
-          flex: 1,
+          backgroundColor: theme?.colors.background
         }}
         keyboardDismissMode="on-drag"
-        stickyHeaderIndices={[0]}
       >
-        <BannerSvg />
-        <SafeAreaProvider
-          style={{ 
-            ...styles.centeredContainer,
-            backgroundColor: theme?.colors.background
-          }} 
+        <SafeAreaView
+          style={styles.centeredContainer} 
         >
           <Input
             ref={salaryRef as any}
             shake={() => { }}
-            label={() => <InputLabel bold>Salario bruto anual</InputLabel>}
+            label={() => <InputLabel bold>{t(LanguageWords.INPUT_LABEL_NI_ANUAL_SALARY)}</InputLabel>}
             rightIcon={<Icon
               name='logo-euro'
               type='ionicon'
@@ -107,38 +101,38 @@ const NettSalaryCalculator = () => {
             value={anualSalary ? anualSalary.toString() : ''}
             onChangeText={(value) => handleInputChange(value, NettSalaryInputNames.ANUAL_SALARY)}
             keyboardType="numeric"
-            placeholder='Ej: 24000'
+            placeholder={t(LanguageWords.INPUT_PLACEHOLDER_NI_ANUAL_SALARY)}
           />
 
           <CustomDropdown
             bold
             value={employmentType}
             onChange={(value) => handleInputChange(value as EmploymentType, NettSalaryInputNames.EMPLOYMENT_TYPE)}
-            data={CONTRACT_TYPE}
-            label='Tipo de contrato'
+            data={CONTRACT_TYPE[currentLanguage]}
+            label={t(LanguageWords.INPUT_LABEL_NI_EMPLOYMENT_TYPE)}
           />
 
           <CustomDropdown
             bold
             value={professionType}
             onChange={(value) => handleInputChange(value, NettSalaryInputNames.PROFESSION_TYPE)}
-            data={PROFESSION_TYPE}
-            label='Categoría profesional'
+            data={PROFESSION_TYPE[currentLanguage]}
+            label={t(LanguageWords.INPUT_LABEL_NI_PROFESSION_TYPE)}
           />
 
           <Input
-            label={() => <InputLabel bold>Número de pagas</InputLabel>}
+            label={() => <InputLabel bold>{t(LanguageWords.INPUT_LABEL_NI_NUMBER_OF_PAYS)}</InputLabel>}
             shake={() => { }}
-            placeholder="Ej: 12"
+            placeholder={t(LanguageWords.INPUT_PLACEHOLDER_NI_NUMBER_OF_PAYS)}
             value={numberOfPays ? numberOfPays.toString() : ''}
             onChangeText={(value) => handleInputChange(value, NettSalaryInputNames.NUMBER_OF_PAYS)}
             keyboardType="numeric"
           />
 
           <Input
-            label={() => <InputLabel bold>Edad</InputLabel>}
+            label={() => <InputLabel bold>{t(LanguageWords.INPUT_LABEL_NI_AGE)}</InputLabel>}
             shake={() => { }}
-            placeholder="Ej: 30"
+            placeholder={t(LanguageWords.INPUT_PLACEHOLDER_NI_AGE)}
             value={age ? age.toString() : ''}
             onChangeText={(value) => handleInputChange(value, NettSalaryInputNames.AGE)}
             keyboardType="numeric"
@@ -148,16 +142,16 @@ const NettSalaryCalculator = () => {
             bold
             value={familyStatus}
             onChange={(value) => handleInputChange(value, NettSalaryInputNames.FAMILY_STATUS)}
-            data={FAMILY_STATUS}
-            label='Situación familiar'
+            data={FAMILY_STATUS[currentLanguage]}
+            label={t(LanguageWords.INPUT_LABEL_NI_FAMILY_STATUS)}
           />
 
           <CustomDropdown
             bold
             value={discapacityType}
             onChange={(value) => handleInputChange(value, NettSalaryInputNames.DISCAPACITY_TYPE)}
-            data={DISCAPACITY_TYPE}
-            label='¿Padeces algún tipo de discapacidad?'
+            data={DISCAPACITY_TYPE[currentLanguage]}
+            label={t(LanguageWords.INPUT_LABEL_NI_DISCAPACITY_TYPE)}
           />
 
           <CheckBox
@@ -166,14 +160,14 @@ const NettSalaryCalculator = () => {
             onPress={() => handleInputChange('', NettSalaryInputNames.GEO_MOVILITY)}
             size={30}
             textStyle={{}}
-            title={<InputLabel bold>Tengo movilidad geográfica</InputLabel>}
+            title={<InputLabel bold>{t(LanguageWords.INPUT_LABEL_NI_GEO_MOVILITY)}</InputLabel>}
             titleProps={{}}
           />
 
           <View style={{flex: 1, width: '100%'}}>
             <Button
               style={{ marginBottom: 40, marginTop: 15, }}
-              title="Calcular"
+              title={t(LanguageWords.BUTTON_CALCULATE)}
               onPress={handleShowResult}
               disabled={showResult}
             />
@@ -194,7 +188,7 @@ const NettSalaryCalculator = () => {
 
           <Disclaimer />
 
-        </SafeAreaProvider>
+        </SafeAreaView>
       </ScrollView>
     </>
   );
@@ -203,12 +197,12 @@ const NettSalaryCalculator = () => {
 const styles = StyleSheet.create({
   centeredContainer: {
     flex: 1,
+    marginTop: -70,
     paddingRight: 25,
     paddingLeft: 25,
     paddingBottom: 0,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingTop: 50,
   },
 });
 

@@ -1,8 +1,9 @@
 import { Text, Button, useTheme } from '@rneui/themed';
-import { Modal, StyleSheet, View } from 'react-native';
-import { NettSalaryCalculator } from '../../types';
+import { StyleSheet, View } from 'react-native';
+import { LanguageWords, NettSalaryCalculator } from '../../types';
 import { forwardRef } from 'react';
 import { getCurrencyFormatter } from '../../utils/currencyFormatter';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   result: NettSalaryCalculator;
@@ -11,6 +12,7 @@ interface Props {
 }
 
 const ResultModal = forwardRef((props: Props, ref) => {
+  const { t } = useTranslation();
   const { result, onRecalculate, isVisible } = props;
   const { theme } = useTheme();
 
@@ -21,7 +23,7 @@ const ResultModal = forwardRef((props: Props, ref) => {
       <View style={styles.innerContainer}>
         <View style={styles.salary}>
           <Text bold style={styles.text}>
-            Salario mensual
+            {t(LanguageWords.RESULTS_NI_TITLE)}
           </Text>
           <Text 
             bold 
@@ -37,7 +39,7 @@ const ResultModal = forwardRef((props: Props, ref) => {
         <View style={styles.moreInfo}>
           <View>
             <Text bold style={styles.text}>
-              I.R.P.F./mes
+              {t(LanguageWords.RESULTS_NI_MONTHLY_IRPF)}
             </Text>
             <Text bold style={styles.value}>
               {result.irpf || '0'} %
@@ -45,7 +47,7 @@ const ResultModal = forwardRef((props: Props, ref) => {
           </View>
           <View>
             <Text bold style={styles.text}>
-              S.S./mes
+              {t(LanguageWords.RESULTS_NI_MONTHLY_SS)}
             </Text>
             <Text bold style={styles.value}>
               {result.ss || '0'} %
@@ -55,7 +57,7 @@ const ResultModal = forwardRef((props: Props, ref) => {
         <View style={styles.moreInfo}>
           <View>
             <Text bold style={styles.text}>
-              Total I.R.P.F/año
+              {t(LanguageWords.RESULTS_NI_ANUAL_IRPF)}
             </Text>
             <Text bold style={styles.value}>
               {getCurrencyFormatter(result.anualIRPF)}
@@ -63,7 +65,7 @@ const ResultModal = forwardRef((props: Props, ref) => {
           </View>
           <View>
             <Text bold style={styles.text}>
-              Total S.S./año
+              {t(LanguageWords.RESULTS_NI_ANUAL_SS)}
             </Text>
             <Text bold style={styles.value}>
               {getCurrencyFormatter(result.anualSS)}
@@ -75,7 +77,7 @@ const ResultModal = forwardRef((props: Props, ref) => {
             marginTop: 20,
           }}
           onPress={onRecalculate}
-          title="Recalcular"
+          title={t(LanguageWords.BUTTON_RECALCULATE)}
         />
       </View>
     </View>

@@ -1,36 +1,36 @@
-import React, { useRef } from 'react';
-import { Animated } from 'react-native';
+import React from 'react';
 import { NettSalaryCalculatorView, ParoCalculatorView } from './pages';
 import { NavigationContainer } from '@react-navigation/native';
 import { navigationRef } from './hooks/navigation';
-import { PageNames, PageTitle } from './types';
-import { Banner } from './components';
+import { LanguageWords, PageNames, PageTitle } from './types';
+import { LanguageFAB, TabBar } from './components';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { useTranslation } from 'react-i18next';
 
 const {Navigator, Screen} = createMaterialTopTabNavigator();
 
 const Src = () => {
-  const testRef = useRef<any>(new Animated.Value(145)).current;
+  const { t } = useTranslation();
 
   return (
     <NavigationContainer ref={navigationRef}>
       <Navigator
         tabBar={(props) => <>
-          <Banner {...props as any} />
+          <TabBar {...props as any} />
         </>}
       >
           <Screen 
             name={PageNames.NETT_SALARY} 
             component={NettSalaryCalculatorView}
-            options={{ title: PageTitle.NETT_SALARY }}
-            initialParams={{ testRef }}
+            options={{ title: t([LanguageWords.PAGE_TITLE_NET_INCOME]) }}
           />
           <Screen 
             name={PageNames.PARO}
             component={ParoCalculatorView} 
-            options={{ title: PageTitle.PARO }} 
+            options={{ title: t(LanguageWords.PAGE_TITLE_PARO) }} 
           />
       </Navigator>
+      <LanguageFAB />
     </NavigationContainer>
   );
 }
